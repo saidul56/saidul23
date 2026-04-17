@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saidul Islam | Data Analyst & Chemometric Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --bg: #080c10;
+    --bg2: #0d1219;
+    --bg3: #111821;
+    --surface: #141c26;
+    --surface2: #1a2433;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #e8edf4;
+    --text2: #8a9ab5;
+    --text3: #5a6a82;
+    --accent: #00e5b0;
+    --accent2: #0095ff;
+    --accent3: #ff6b35;
+    --gold: #f0c040;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Outfit', sans-serif;
+    --mono: 'DM Mono', monospace;
+    --r: 12px;
+    --r2: 20px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── CANVAS BACKGROUND ─── */
+  #canvas-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(8,12,16,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s;
+  }
+
+  nav.scrolled {
+    background: rgba(8,12,16,0.97);
+    border-bottom-color: var(--border2);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .logo-badge {
+    width: 38px; height: 38px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 13px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.05em;
+  }
+
+  .logo-text {
+    font-family: var(--serif);
+    font-size: 19px;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 6px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    padding: 6px 14px;
+    border-radius: 100px;
+    transition: all 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: var(--text);
+    background: var(--surface);
+  }
+
+  .nav-links a.active {
+    color: var(--accent);
+    background: rgba(0,229,176,0.08);
+  }
+
+  .nav-cta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 22px;
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 500;
+    font-size: 13px;
+    border-radius: 100px;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: all 0.2s;
+  }
+
+  .nav-cta:hover {
+    background: #00ffc4;
+    transform: translateY(-1px);
+  }
+
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: rgba(8,12,16,0.98);
+    border-bottom: 1px solid var(--border2);
+    padding: 20px 40px 28px;
+    z-index: 99;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+  }
+  .mobile-nav a:hover { color: var(--accent); }
+
+  /* ─── MAIN WRAPPER ─── */
+  main { position: relative; z-index: 1; }
+
+  /* ─── HERO ─── */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 68px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,229,176,0.08);
+    border: 1px solid rgba(0,229,176,0.2);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(52px, 7vw, 88px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent3);
+  }
+
+  .hero-title {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--text2);
+    margin-bottom: 24px;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-title strong {
+    color: var(--accent2);
+    font-weight: 500;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    color: var(--text3);
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+
+  .pill {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 5px 12px;
+    border: 1px solid var(--border2);
+    border-radius: 100px;
+    color: var(--text3);
+    transition: all 0.2s;
+  }
+
+  .pill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(0,229,176,0.06);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: all 0.25s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: #00ffc4;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,229,176,0.3);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text);
+    font-weight: 400;
+    font-size: 14px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    border: 1px solid var(--border2);
+    letter-spacing: 0.02em;
+    transition: all 0.25s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--text2);
+    background: var(--surface);
+  }
+
+  .hero-socials {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .social-link {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text3);
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.2s;
+  }
+
+  .social-link:hover {
+    color: var(--accent);
+    border-color: rgba(0,229,176,0.3);
+    background: rgba(0,229,176,0.06);
+    transform: translateY(-2px);
+  }
+
+  /* ─── HERO PHOTO CARD ─── */
+  .hero-photo-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .photo-frame {
+    position: relative;
+    border-radius: var(--r2);
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    max-height: 480px;
+    border: 1px solid var(--border2);
+  }
+
+  .photo-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(15%) contrast(1.05);
+    transition: filter 0.4s;
+  }
+
+  .photo-frame:hover img { filter: grayscale(0%) contrast(1); }
+
+  .photo-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(8,12,16,0.9));
+    padding: 30px 24px 24px;
+  }
+
+  .photo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.05em;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 14px 16px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .stat-card:hover {
+    border-color: rgba(0,229,176,0.2);
+    background: var(--surface2);
+  }
+
+  .stat-n {
+    font-family: var(--serif);
+    font-size: 26px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-l {
+    font-size: 11px;
+    color: var(--text3);
+    font-family: var(--mono);
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { position: relative; }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 40px;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .section-sub {
+    font-size: 15px;
+    color: var(--text2);
+    max-width: 560px;
+    margin-bottom: 60px;
+    line-height: 1.7;
+  }
+
+  /* ─── REVEAL ANIMATION ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ─── SECTION DIVIDERS ─── */
+  .alt-bg { background: var(--bg2); }
+
+  /* ─── RESEARCH ─── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r2);
+    padding: 32px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card:hover {
+    border-color: var(--border2);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .card-meta {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  .checklist li::before {
+    content: '';
+    width: 16px; height: 16px;
+    min-width: 16px;
+    border-radius: 50%;
+    background: rgba(0,229,176,0.1);
+    border: 1px solid rgba(0,229,176,0.3);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%2300e5b0' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 3px;
+  }
+
+  .interest-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .interest-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--text2);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .interest-item::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent2);
+    min-width: 4px;
+  }
+
+  .interest-item:hover {
+    border-color: rgba(0,149,255,0.3);
+    color: var(--text);
+    background: rgba(0,149,255,0.04);
+  }
+
+  /* ─── PUBLICATIONS ─── */
+  .pub-list { display: flex; flex-direction: column; gap: 20px; }
+
+  .pub-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r2);
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: start;
+    transition: all 0.3s;
+  }
+
+  .pub-card:hover {
+    border-color: var(--border2);
+    transform: translateX(4px);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+  }
+
+  .pub-index {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text3);
+    padding-top: 4px;
+    min-width: 28px;
+  }
+
+  .pub-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+  }
+
+  .pub-badge.published {
+    background: rgba(0,229,176,0.1);
+    border: 1px solid rgba(0,229,176,0.25);
+    color: var(--accent);
+  }
+
+  .pub-badge.review {
+    background: rgba(240,192,64,0.1);
+    border: 1px solid rgba(240,192,64,0.25);
+    color: var(--gold);
+  }
+
+  .pub-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .pub-journal {
+    font-size: 13px;
+    color: var(--text3);
+    font-family: var(--mono);
+  }
+
+  /* ─── AWARDS ─── */
+  .awards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+  .award-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r2);
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .award-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 40px; height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.3s, width 0.3s;
+  }
+
+  .award-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+
+  .award-card:hover::after {
+    opacity: 1;
+    width: 80px;
+  }
+
+  .award-icon {
+    font-size: 44px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .award-title {
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .award-org {
+    font-size: 12px;
+    color: var(--text3);
+    font-family: var(--mono);
+    line-height: 1.5;
+  }
+
+  /* ─── ACTIVITIES ─── */
+  .timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border2);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 24px;
+    padding: 24px 0;
+    position: relative;
+  }
+
+  .timeline-dot {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 2px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 14px;
+    z-index: 1;
+    flex-shrink: 0;
+    transition: all 0.3s;
+  }
+
+  .timeline-item:hover .timeline-dot {
+    border-color: var(--accent);
+    background: rgba(0,229,176,0.1);
+  }
+
+  .timeline-content {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 20px 24px;
+    transition: all 0.3s;
+  }
+
+  .timeline-item:hover .timeline-content {
+    border-color: var(--border2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+
+  .timeline-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .timeline-title {
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .timeline-org {
+    font-size: 13px;
+    color: var(--text3);
+  }
+
+  /* ─── SKILLS ─── */
+  .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+  .skill-group-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .skill-group-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .skill-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .chip {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 8px 16px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text2);
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .chip.tech { border-color: rgba(0,149,255,0.2); color: rgba(0,149,255,0.9); background: rgba(0,149,255,0.06); }
+  .chip.tech:hover { border-color: rgba(0,149,255,0.5); background: rgba(0,149,255,0.1); }
+
+  .chip.lab { border-color: rgba(0,229,176,0.2); color: rgba(0,229,176,0.9); background: rgba(0,229,176,0.06); }
+  .chip.lab:hover { border-color: rgba(0,229,176,0.5); background: rgba(0,229,176,0.1); }
+
+  .chip.lang { border-color: rgba(255,107,53,0.2); color: rgba(255,107,53,0.9); background: rgba(255,107,53,0.06); }
+  .chip.lang:hover { border-color: rgba(255,107,53,0.5); background: rgba(255,107,53,0.1); }
+
+  /* ─── ACCOMPLISHMENTS ─── */
+  .acc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .acc-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r2);
+    padding: 32px;
+    transition: all 0.3s;
+  }
+
+  .acc-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+  }
+
+  .acc-card-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .acc-card-title i {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: rgba(0,229,176,0.1);
+    border: 1px solid rgba(0,229,176,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .cert-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cert-list li {
+    font-size: 13.5px;
+    color: var(--text2);
+    padding: 10px 14px;
+    background: var(--bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cert-list li::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent2);
+    min-width: 4px;
+  }
+
+  .cert-list li:hover {
+    border-color: rgba(0,149,255,0.25);
+    color: var(--text);
+  }
+
+  .comp-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .comp-item {
+    padding: 16px 20px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--text2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s;
+  }
+
+  .comp-item:hover { border-color: var(--border2); color: var(--text); }
+
+  .comp-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: rgba(0,229,176,0.1);
+    border: 1px solid rgba(0,229,176,0.2);
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── PROJECTS ─── */
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r2);
+    padding: 28px;
+    transition: all 0.35s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at top left, rgba(0,229,176,0.04), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .project-card:hover::before { opacity: 1; }
+
+  .project-card:hover {
+    border-color: rgba(0,229,176,0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  }
+
+  .project-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    display: inline-flex;
+    width: fit-content;
+  }
+
+  .project-tag.food { background: rgba(0,229,176,0.1); color: var(--accent); border: 1px solid rgba(0,229,176,0.2); }
+  .project-tag.adulter { background: rgba(0,149,255,0.1); color: var(--accent2); border: 1px solid rgba(0,149,255,0.2); }
+  .project-tag.env { background: rgba(240,192,64,0.1); color: var(--gold); border: 1px solid rgba(240,192,64,0.2); }
+
+  .project-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  .project-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  /* ─── GALLERY ─── */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .gallery-item {
+    border-radius: var(--r);
+    overflow: hidden;
+    aspect-ratio: 1;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid var(--border);
+  }
+
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%);
+    transition: all 0.4s;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.08);
+    filter: grayscale(0%);
+  }
+
+  .gallery-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(8,12,16,0.95));
+    padding: 24px 14px 14px;
+    font-size: 12px;
+    color: var(--text2);
+    font-family: var(--mono);
+    transform: translateY(100%);
+    transition: transform 0.3s;
+  }
+
+  .gallery-item:hover .gallery-caption { transform: translateY(0); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 60px 40px;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 10px;
+  }
+
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text3);
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── SCROLL TOP ─── */
+  #scroll-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 44px; height: 44px;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    z-index: 99;
+  }
+
+  #scroll-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #scroll-top:hover {
+    background: #00ffc4;
+    transform: translateY(-2px);
+  }
+
+  /* ─── PROGRESS BAR ─── */
+  #progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    z-index: 200;
+    transition: width 0.1s linear;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-photo-wrap { display: none; }
+    .two-col { grid-template-columns: 1fr; }
+    .awards-grid { grid-template-columns: 1fr 1fr; }
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+    .acc-grid { grid-template-columns: 1fr; }
+    .skills-layout { grid-template-columns: 1fr; }
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hamburger { display: block; }
+    .section-inner { padding: 70px 24px; }
+  }
+
+  @media (max-width: 600px) {
+    .awards-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .stat-row { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress"></div>
+
+<!-- CANVAS BG -->
+<canvas id="canvas-bg"></canvas>
+
+<!-- SCROLL TOP -->
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <div class="logo-badge">SI</div>
+    <span class="logo-text">Saidul Islam</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#activities">Activities</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#accomplishments">Accomplishments</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+  </ul>
+
+  <div style="display:flex;align-items:center;gap:12px;">
+    <a href="https://drive.google.com/file/d/1mjLFe-AF95j5_p2-ONdW5VVrDUHtCK5_/view" target="_blank" class="nav-cta">
+      <i class="fas fa-download" style="font-size:12px;"></i> Download CV
+    </a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#home" onclick="closeMenu()">Home</a>
+  <a href="#research" onclick="closeMenu()">Research</a>
+  <a href="#publications" onclick="closeMenu()">Publications</a>
+  <a href="#awards" onclick="closeMenu()">Awards</a>
+  <a href="#activities" onclick="closeMenu()">Activities</a>
+  <a href="#skills" onclick="closeMenu()">Skills</a>
+  <a href="#accomplishments" onclick="closeMenu()">Accomplishments</a>
+  <a href="#projects" onclick="closeMenu()">Projects</a>
+  <a href="#gallery" onclick="closeMenu()">Gallery</a>
+</div>
+
+<main>
+
+<!-- ═══ HOME ═══ -->
+<section id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag reveal">AVAILABLE FOR COLLABORATION</div>
+
+      <h1 class="hero-name reveal reveal-delay-1">
+        Hi, I am<br><em>Saidul Islam</em>
+      </h1>
+
+      <p class="hero-title reveal reveal-delay-2">
+        <strong>Data Analyst</strong> &amp; Chemometric Specialist
+      </p>
+
+      <p class="hero-desc reveal reveal-delay-3">
+        B.Sc. Chemistry graduate from HSTU specializing in spectroscopic data analysis, machine learning-driven chemometrics, and food safety research.
+      </p>
+
+      <div class="hero-pills reveal reveal-delay-3">
+        <span class="pill">Python</span>
+        <span class="pill">Machine Learning</span>
+        <span class="pill">ATR-FTIR</span>
+        <span class="pill">SIMCA 14.1</span>
+        <span class="pill">MATLAB</span>
+        <span class="pill">Chemometrics</span>
+        <span class="pill">UHPLC-DAD</span>
+        <span class="pill">OriginPro</span>
+      </div>
+
+      <div class="hero-actions reveal reveal-delay-4">
+        <a href="#projects" class="btn-primary">
+          Explore Projects <i class="fas fa-arrow-right" style="font-size:12px;"></i>
+        </a>
+        <a href="mailto:saidul23.hstu@gmail.com" class="btn-secondary">
+          <i class="fas fa-envelope" style="font-size:13px;"></i> Get In Touch
+        </a>
+      </div>
+
+      <div class="hero-socials reveal reveal-delay-5">
+        <a href="https://www.facebook.com/isaidul23/" target="_blank" class="social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.linkedin.com/in/saidul-isslam23/" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="mailto:saidul23.hstu@gmail.com" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.researchgate.net/profile/Saidul-Islam-15" target="_blank" class="social-link" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
+        <a href="https://scholar.google.com/citations?user=bHUgNwQAAAAJ" target="_blank" class="social-link" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+        <a href="https://orcid.org/0009-0007-8425-2414" target="_blank" class="social-link" title="ORCID"><i class="fab fa-orcid"></i></a>
+        <a href="https://github.com/saidul56" target="_blank" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+
+    <div class="hero-photo-wrap reveal reveal-delay-2">
+      <div class="photo-frame">
+        <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUCWTJ71P38DOILQMvoWFOqQdmqN2-xXG-XqVkj2UGDzQ4pdYyulDVUJAqr1Tcp6gDDn6gCSt_g0p6gg_3Pp7NAoNv4n9K6u0Jaofk7h6IoIlsqmBxCV-C_mKnhs8Hi8sOxRUtVmCEdTRaVVWVnTSJDmkVW1yyWqTVifK9CULSkIqFEeYS4fKizGqSvAQrLiiSs9ZI98bV2sNx4-PyRJvBe0de4SLoFiufJu=w1280" alt="Saidul Islam">
+        <div class="photo-overlay">
+          <span class="photo-badge"><i class="fas fa-flask" style="font-size:10px;"></i> HSTU, Bangladesh</span>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-n">2+</div>
+          <div class="stat-l">Publications</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n">3+</div>
+          <div class="stat-l">Projects</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n">6+</div>
+          <div class="stat-l">Certs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESEARCH ═══ -->
+<section id="research" class="alt-bg">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Research</div>
+      <h2 class="section-title">Experience &amp; Interests</h2>
+      <p class="section-sub">Contributing to cutting-edge research at the intersection of chemistry, data science, and spectroscopy.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="card reveal reveal-delay-1">
+        <div class="card-meta"><i class="fas fa-flask"></i> &nbsp;March 2024 – Present</div>
+        <h3 class="card-title">Research Assistant</h3>
+        <p style="font-size:13px;color:var(--text3);margin-bottom:20px;">Dr. Md. Atikul Islam Research Lab &nbsp;·&nbsp; HSTU</p>
+        <ul class="checklist">
+          <li>Assisted MS research fellows in laboratory operations, method development, data collection and analysis</li>
+          <li>Collaborated on data interpretation and manuscript drafting for peer-reviewed publications</li>
+          <li>Applied chemometric tools (SIMCA, OriginPro, SPSS) and machine learning models for spectral data</li>
+        </ul>
+      </div>
+
+      <div class="card reveal reveal-delay-2">
+        <div class="card-meta"><i class="fas fa-compass"></i> &nbsp;Research Interests</div>
+        <h3 class="card-title">Areas of Focus</h3>
+        <div class="interest-grid">
+          <div class="interest-item">Spectroscopic Chemometric Analysis</div>
+          <div class="interest-item">Machine Learning in Chemometrics</div>
+          <div class="interest-item">Nanoparticle Synthesis &amp; Applications</div>
+          <div class="interest-item">Semiconductor Materials</div>
+          <div class="interest-item">Computational Chemistry</div>
+          <div class="interest-item">Nuclear &amp; Sustainable Energy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PUBLICATIONS ═══ -->
+<section id="publications">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Scholarly Work</div>
+      <h2 class="section-title">Publications &amp; Presentations</h2>
+      <p class="section-sub">Peer-reviewed research advancing food safety science and environmental chemistry.</p>
+    </div>
+
+    <div class="pub-list">
+      <div class="pub-card reveal reveal-delay-1">
+        <div class="pub-index">01</div>
+        <div>
+          <span class="pub-badge published"><i class="fas fa-circle" style="font-size:6px;"></i> Published</span>
+          <p class="pub-title">Evaluating physicochemical and antioxidant properties of farm-fresh and branded honey from Bangladesh using UHPLC-DAD and multivariate analysis</p>
+          <p class="pub-journal">Journal of AOAC International · Oxford University Press · Impact Factor: 1.7</p>
+        </div>
+      </div>
+
+      <div class="pub-card reveal reveal-delay-2">
+        <div class="pub-index">02</div>
+        <div>
+          <span class="pub-badge review"><i class="fas fa-circle" style="font-size:6px;"></i> Under Review</span>
+          <p class="pub-title">Metal‒oxide nanoparticles for air pollution control</p>
+          <p class="pub-journal">Springer · Book Chapter 14</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AWARDS ═══ -->
+<section id="awards" class="alt-bg">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Recognition</div>
+      <h2 class="section-title">Awards &amp; Honors</h2>
+      <p class="section-sub">Recognized for excellence in research, digital skills, and competitive programming.</p>
+    </div>
+
+    <div class="awards-grid">
+      <div class="award-card reveal reveal-delay-1">
+        <span class="award-icon">🥈</span>
+        <div class="award-title">Silver Explorer Award for Oral Presentation</div>
+        <div class="award-org">3rd International Poster Competition for Young Researchers 2025, UniV.</div>
+      </div>
+      <div class="award-card reveal reveal-delay-2">
+        <span class="award-icon">🥈</span>
+        <div class="award-title">2nd Position — Digital Skills</div>
+        <div class="award-org">Student Training Programme for Digital Skill Development 2025</div>
+      </div>
+      <div class="award-card reveal reveal-delay-3">
+        <span class="award-icon">🏆</span>
+        <div class="award-title">1st Runner-up Team</div>
+        <div class="award-org">Intra University Programming Contest 2022 · HSTU</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ACTIVITIES ═══ -->
+<section id="activities">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Engagement</div>
+      <h2 class="section-title">Activities &amp; Volunteering</h2>
+      <p class="section-sub">Actively engaged in community impact, scientific outreach, and academic support.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-dot"><i class="fas fa-heart"></i></div>
+        <div class="timeline-content">
+          <div class="timeline-date">01/05/2025 – Present</div>
+          <div class="timeline-title">Public Awareness &amp; Management Volunteer</div>
+          <div class="timeline-org">Bangladesh Red Crescent Society</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-2">
+        <div class="timeline-dot"><i class="fas fa-flask"></i></div>
+        <div class="timeline-content">
+          <div class="timeline-date">02/03/2025</div>
+          <div class="timeline-title">Seminar on Honey Quality Control</div>
+          <div class="timeline-org">PUM, Netherlands — International Knowledge Exchange</div>
+        </div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-3">
+        <div class="timeline-dot"><i class="fas fa-laptop"></i></div>
+        <div class="timeline-content">
+          <div class="timeline-date">28/01/2025</div>
+          <div class="timeline-title">Technical Support — MS Defense Program</div>
+          <div class="timeline-org">Department of Chemistry, HSTU</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills" class="alt-bg">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Expertise</div>
+      <h2 class="section-title">Skills &amp; Tools</h2>
+      <p class="section-sub">A versatile toolkit spanning computational, laboratory, and communication domains.</p>
+    </div>
+
+    <div class="skills-layout">
+      <div class="reveal reveal-delay-1">
+        <div class="skill-group-label">Technical &amp; Computational</div>
+        <div class="skill-chips">
+          <span class="chip tech">Python</span>
+          <span class="chip tech">Machine Learning</span>
+          <span class="chip tech">MATLAB 2024b</span>
+          <span class="chip tech">SIMCA 14.1</span>
+          <span class="chip tech">OriginPro 2024</span>
+          <span class="chip tech">IBM SPSS</span>
+          <span class="chip tech">Google Colab</span>
+          <span class="chip tech">VS Code</span>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <div class="skill-group-label">Laboratory Instrumentation</div>
+        <div class="skill-chips">
+          <span class="chip lab">ATR-FTIR Spectrometer</span>
+          <span class="chip lab">UV-Vis Spectrometer</span>
+          <span class="chip lab">UHPLC-DAD</span>
+          <span class="chip lab">Steam Distillation</span>
+          <span class="chip lab">Chemometric Modeling</span>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-3">
+        <div class="skill-group-label">Languages</div>
+        <div class="skill-chips">
+          <span class="chip lang">Bengali — Native</span>
+          <span class="chip lang">English — Proficient</span>
+          <span class="chip lang">Hindi — Basic</span>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-4">
+        <div class="skill-group-label">Soft Skills</div>
+        <div class="skill-chips">
+          <span class="chip">Data Visualization</span>
+          <span class="chip">Scientific Writing</span>
+          <span class="chip">Research Collaboration</span>
+          <span class="chip">Critical Thinking</span>
+          <span class="chip">Presentation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ACCOMPLISHMENTS ═══ -->
+<section id="accomplishments">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Milestones</div>
+      <h2 class="section-title">Accomplishments</h2>
+      <p class="section-sub">Building expertise through competitive challenges and industry-recognized certifications.</p>
+    </div>
+
+    <div class="acc-grid">
+      <div class="acc-card reveal reveal-delay-1">
+        <div class="acc-card-title">
+          <i class="fas fa-certificate" style="display:flex;align-items:center;justify-content:center;width:36px;height:36px;"></i>
+          Certifications
+        </div>
+        <ul class="cert-list">
+          <li>Aspire Leadership Program — Harvard Business School</li>
+          <li>Chemometrics Online Workshop — University of Scranton</li>
+          <li>Machine Learning Fundamentals — DataCamp</li>
+          <li>Basic Programming with Python — EDGE</li>
+          <li>MATLAB Onramp — MathWorks</li>
+          <li>Titration Techniques &amp; Integration — American Chemical Society</li>
+        </ul>
+      </div>
+
+      <div class="acc-card reveal reveal-delay-2">
+        <div class="acc-card-title">
+          <i class="fas fa-trophy" style="display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:rgba(240,192,64,0.1);border-color:rgba(240,192,64,0.2);color:var(--gold);"></i>
+          Competitions
+        </div>
+        <div class="comp-list">
+          <div class="comp-item">
+            <span>International Youth Math Challenge 2025 (IYMC)</span>
+            <span class="comp-badge">Qualifier</span>
+          </div>
+          <div class="comp-item">
+            <span>International Computer Science Competition 2025 (ICSC)</span>
+            <span class="comp-badge">Qualifier</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects" class="alt-bg">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-sub">Applied research combining advanced instrumentation with data science methodologies.</p>
+    </div>
+
+    <div class="projects-grid">
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-icon">🍯</div>
+        <span class="project-tag food">Food Safety · Chemometrics</span>
+        <p class="project-title">Assessment of Honey Properties using UHPLC-DAD and ATR-FTIR with Chemometric Analysis</p>
+        <p style="font-size:12px;color:var(--text3);margin-top:auto;">Multivariate methods · PCA · PLS-DA</p>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-icon">🥛</div>
+        <span class="project-tag adulter">Adulteration Detection</span>
+        <p class="project-title">Detection of Milk Adulteration with Palm Oil using ATR-FTIR &amp; Chemometric Models</p>
+        <p style="font-size:12px;color:var(--text3);margin-top:auto;">SIMCA · Discriminant Analysis</p>
+      </div>
+
+      <div class="project-card reveal reveal-delay-3">
+        <div class="project-icon">⚛️</div>
+        <span class="project-tag env">Environmental Radioactivity</span>
+        <p class="project-title">Naturally Occurring Radioactive Materials in Soil around Barapukuria Power Plant</p>
+        <p style="font-size:12px;color:var(--text3);margin-top:auto;">NORM · Environmental Monitoring</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALLERY ═══ -->
+<section id="gallery">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Visual Journal</div>
+      <h2 class="section-title">Gallery</h2>
+      <p class="section-sub">A glimpse into laboratory work, research activities, and scientific events.</p>
+    </div>
+
+    <div class="gallery-grid reveal reveal-delay-1">
+      <div class="gallery-item">
+        <img src="https://picsum.photos/id/1015/600/600" alt="Research">
+        <div class="gallery-caption">ATR-FTIR Honey Study</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://picsum.photos/id/1074/600/600" alt="Lab">
+        <div class="gallery-caption">Laboratory Analysis</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://picsum.photos/id/1047/600/600" alt="Conference">
+        <div class="gallery-caption">Research Conference</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://picsum.photos/id/1035/600/600" alt="Fieldwork">
+        <div class="gallery-caption">Field Sampling</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="logo-badge" style="width:44px;height:44px;font-size:14px;">SI</div>
+    <div class="footer-socials">
+      <a href="https://www.facebook.com/isaidul23/" target="_blank" class="social-link"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.linkedin.com/in/saidul-isslam23/" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+      <a href="mailto:saidul23.hstu@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+      <a href="https://www.researchgate.net/profile/Saidul-Islam-15" target="_blank" class="social-link"><i class="fab fa-researchgate"></i></a>
+      <a href="https://scholar.google.com/citations?user=bHUgNwQAAAAJ" target="_blank" class="social-link"><i class="fas fa-graduation-cap"></i></a>
+      <a href="https://orcid.org/0009-0007-8425-2414" target="_blank" class="social-link"><i class="fab fa-orcid"></i></a>
+      <a href="https://github.com/saidul56" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+    </div>
+    <p class="footer-copy">© 2026 Saidul Islam &nbsp;·&nbsp; Data Analyst &amp; Chemometric Specialist &nbsp;·&nbsp; Bangladesh</p>
+  </div>
+</footer>
+
+<script>
+/* ─ CANVAS PARTICLE NETWORK ─ */
+(function(){
+  const canvas = document.getElementById('canvas-bg');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const COUNT = 70;
+  const MAX_DIST = 140;
+
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function Particle(){
+    this.x = Math.random()*W;
+    this.y = Math.random()*H;
+    this.vx = (Math.random()-0.5)*0.4;
+    this.vy = (Math.random()-0.5)*0.4;
+    this.r = Math.random()*1.5+0.5;
+  }
+
+  function init(){
+    resize();
+    particles = [];
+    for(let i=0;i<COUNT;i++) particles.push(new Particle());
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<particles.length;i++){
+      const p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+      if(p.x<0||p.x>W) p.vx*=-1;
+      if(p.y<0||p.y>H) p.vy*=-1;
+
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(0,229,176,0.5)';
+      ctx.fill();
+
+      for(let j=i+1;j<particles.length;j++){
+        const q = particles[j];
+        const dx=p.x-q.x, dy=p.y-q.y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<MAX_DIST){
+          ctx.beginPath();
+          ctx.moveTo(p.x,p.y);
+          ctx.lineTo(q.x,q.y);
+          const alpha=(1-d/MAX_DIST)*0.15;
+          ctx.strokeStyle=`rgba(0,149,255,${alpha})`;
+          ctx.lineWidth=0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+/* ─ SCROLL PROGRESS ─ */
+window.addEventListener('scroll', ()=>{
+  const el = document.getElementById('progress');
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  el.style.width = pct + '%';
+
+  const btn = document.getElementById('scroll-top');
+  window.scrollY > 400 ? btn.classList.add('visible') : btn.classList.remove('visible');
+
+  const nav = document.getElementById('navbar');
+  window.scrollY > 10 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
+
+  /* active nav link */
+  const sections = ['home','research','publications','awards','activities','skills','accomplishments','projects','gallery'];
+  let current = '';
+  for(const id of sections){
+    const el = document.getElementById(id);
+    if(!el) continue;
+    if(window.scrollY >= el.offsetTop - 100) current = id;
+  }
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.classList.toggle('active', a.getAttribute('href')==='#'+current);
+  });
+}, {passive:true});
+
+/* ─ REVEAL ON SCROLL ─ */
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* Mark hero items visible immediately */
+document.querySelectorAll('#home .reveal').forEach((el, i)=>{
+  setTimeout(()=>{ el.classList.add('visible'); }, i*120);
+});
+
+/* ─ MOBILE MENU ─ */
+function toggleMenu(){
+  const m = document.getElementById('mobile-nav');
+  const icon = document.getElementById('hamburger').querySelector('i');
+  m.classList.toggle('open');
+  icon.className = m.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+}
+
+function closeMenu(){
+  const m = document.getElementById('mobile-nav');
+  const icon = document.getElementById('hamburger').querySelector('i');
+  m.classList.remove('open');
+  icon.className = 'fas fa-bars';
+}
+
+/* ─ SMOOTH SCROLL for nav links ─ */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target){
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  });
+});
+
+console.log('%c✅ Saidul Islam Portfolio — Professional Edition', 'color:#00e5b0; font-size:15px; font-weight:bold;');
+</script>
+</body>
+</html>
